@@ -37,3 +37,11 @@ class NextBus(object):
 		data_result['results'] = results
 
 		return data_result
+
+	def printTiming(self,name):
+		data = self.getBusTiming(name)['ShuttleServiceResult']
+		output_string = 'Bus Stop : '+ data['caption']+'\n\n'
+		for bus in data['shuttles']:
+			output_string = output_string + bus['name'] + ' : \n' + bus['arrivalTime'] + ' , ' + bus['nextArrivalTime'] + '(next bus)\n\n'
+		output_string = output_string[:-2]
+		return output_string
