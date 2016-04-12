@@ -38,10 +38,25 @@ class NextBus(object):
 
 		return data_result
 
+
 	def printTiming(self,name):
 		data = self.getBusTiming(name)['ShuttleServiceResult']
+
+		if data['caption']=='':
+			return "Incorrect bus-stop-name! No results found"
+
 		output_string = 'Bus Stop : '+ data['caption']+'\n\n'
+
 		for bus in data['shuttles']:
 			output_string = output_string + bus['name'] + ' : \n' + bus['arrivalTime'] + ' , ' + bus['nextArrivalTime'] + '(next bus)\n\n'
 		output_string = output_string[:-2]
+
+		return output_string
+
+	def printBusStops(self):
+		data = self.getAllBusStops()['BusStopsResult']['busstops']
+		output_string = ''
+		for stop in data:
+			output_string = output_string + stop['caption'] + ' : ' + stop['name'] + '\n'
+		output_string = output_string[:-1]
 		return output_string
